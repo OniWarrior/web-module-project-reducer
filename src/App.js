@@ -5,16 +5,22 @@ import './App.css';
 import TotalDisplay from './components/TotalDisplay';
 import CalcButton from './components/CalcButton';
 import {useReducer} from 'react'
-import{initialState} from './reducers/index'
-import reducer from './reducers/reducer'
-import {addOne} from './actions/index'
+import {initialState} from './reducers/index'
+import reducer from './reducers/index'
+
+import {addOne,applyNumber} from './actions/index'
+
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const handleButtonOne=()  =>{
-    dispatch(addOne());
-  }
+const handleApplyNumber = event=>{
+  
+  dispatch(applyNumber(parseInt(event.target.innerText)))
+}
+  // const handleButtonOne=()  =>{
+  //   dispatch(addOne());
+  // }
 
   return (
     <div className="App">
@@ -39,21 +45,21 @@ function App() {
             </div>
 
             <div className="row">
-              <CalcButton value={1} onClick={handleButtonOne}/>
-              <CalcButton value={2}/>
-              <CalcButton value={3}/>
+              <CalcButton value={1} onClick={/*handleButtonOne*/ handleApplyNumber}/>
+              <CalcButton value={2} onClick={/*handleButtonOne*/ handleApplyNumber}/>
+              <CalcButton value={3} onClick={/*handleButtonOne*/ handleApplyNumber}/>
             </div>
 
             <div className="row">
-              <CalcButton value={4}/>
-              <CalcButton value={5}/>
-              <CalcButton value={6}/>
+              <CalcButton value={4} onClick={/*handleButtonOne*/ handleApplyNumber}/>
+              <CalcButton value={5} onClick={/*handleButtonOne*/ handleApplyNumber}/>
+              <CalcButton value={6} onClick={/*handleButtonOne*/ handleApplyNumber}/>
             </div>
 
             <div className="row">
-              <CalcButton value={7}/>
-              <CalcButton value={8}/>
-              <CalcButton value={9}/>
+              <CalcButton value={7} onClick={/*handleButtonOne*/ handleApplyNumber}/>
+              <CalcButton value={8} onClick={/*handleButtonOne*/ handleApplyNumber}/>
+              <CalcButton value={9} onClick={/*handleButtonOne*/ handleApplyNumber}/>
             </div>
 
             <div className="row">
