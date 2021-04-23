@@ -4,8 +4,50 @@ import './App.css';
 
 import TotalDisplay from './components/TotalDisplay';
 import CalcButton from './components/CalcButton';
+import {useReducer} from 'react'
+import {initialState} from './reducers/index'
+import reducer from './reducers/index'
+
+import {addOne,
+       applyNumber,
+       changeOperation,
+       clearDisplay,
+       setMemoryValue,
+       applyMemoryValue,
+       resetMemoryValue} from './actions/index'
+
 
 function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+const handleApplyNumber = event=>{
+  
+  dispatch(applyNumber(parseInt(event.target.innerText)))
+}
+
+const handleOperationChange=event=>{
+  
+  dispatch(changeOperation(event.target.innerText))
+}
+
+const handleClearDisplay=event=>{
+  dispatch(clearDisplay(event.target.innerText))
+}
+
+const handleSetMemoryValue= ()=>{
+  dispatch(setMemoryValue(state.total))
+}
+
+const handleApplyMemoryValue=()=>{
+  dispatch(applyMemoryValue(state.memory))
+}
+
+const handleResetMemoryValue=(event)=>{
+  dispatch(resetMemoryValue(event.target.innerText))
+}
+  // const handleButtonOne=()  =>{
+  //   dispatch(addOne());
+  // }
 
   return (
     <div className="App">
@@ -17,44 +59,44 @@ function App() {
         <div className="col-md-12 d-flex justify-content-center">
           <form name="Cal">
             
-            <TotalDisplay value={0}/>
+            <TotalDisplay value={state.total}/>
             <div className="row details">
-              <span id="operation"><b>Operation:</b> X</span>
-              <span id="memory"><b>Memory:</b> 0</span>
+              <span id="operation"><b>Operation:</b>{state.operation} </span>
+              <span id="memory"><b>Memory:</b> {state.memory}</span>
             </div>
             
             <div className="row">
-              <CalcButton value={"M+"}/>
-              <CalcButton value={"MR"}/>
-              <CalcButton value={"MC"}/>
+              <CalcButton value={"M+"} onClick={handleSetMemoryValue}/>
+              <CalcButton value={"MR"} onClick={handleApplyMemoryValue}/>
+              <CalcButton value={"MC"} onClick={handleResetMemoryValue}/>
             </div>
 
             <div className="row">
-              <CalcButton value={1}/>
-              <CalcButton value={2}/>
-              <CalcButton value={3}/>
+              <CalcButton value={1} onClick={/*handleButtonOne*/ handleApplyNumber}/>
+              <CalcButton value={2} onClick={/*handleButtonOne*/ handleApplyNumber}/>
+              <CalcButton value={3} onClick={/*handleButtonOne*/ handleApplyNumber}/>
             </div>
 
             <div className="row">
-              <CalcButton value={4}/>
-              <CalcButton value={5}/>
-              <CalcButton value={6}/>
+              <CalcButton value={4} onClick={/*handleButtonOne*/ handleApplyNumber}/>
+              <CalcButton value={5} onClick={/*handleButtonOne*/ handleApplyNumber}/>
+              <CalcButton value={6} onClick={/*handleButtonOne*/ handleApplyNumber}/>
             </div>
 
             <div className="row">
-              <CalcButton value={7}/>
-              <CalcButton value={8}/>
-              <CalcButton value={9}/>
+              <CalcButton value={7} onClick={/*handleButtonOne*/ handleApplyNumber}/>
+              <CalcButton value={8} onClick={/*handleButtonOne*/ handleApplyNumber}/>
+              <CalcButton value={9} onClick={/*handleButtonOne*/ handleApplyNumber}/>
             </div>
 
             <div className="row">
-              <CalcButton value={"+"}/>
-              <CalcButton value={"*"}/>
-              <CalcButton value={"-"}/>
+              <CalcButton value={"+"} onClick={handleOperationChange}/>
+              <CalcButton value={"*"} onClick={handleOperationChange}/>
+              <CalcButton value={"-"} onClick={handleOperationChange}/>
             </div>
 
             <div className="row ce_button">
-              <CalcButton value={"CE"}/>
+              <CalcButton value={"CE"} onClick={handleClearDisplay}/>
             </div>
 
           </form>
