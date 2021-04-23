@@ -8,7 +8,13 @@ import {useReducer} from 'react'
 import {initialState} from './reducers/index'
 import reducer from './reducers/index'
 
-import {addOne,applyNumber,changeOperation,clearDisplay} from './actions/index'
+import {addOne,
+       applyNumber,
+       changeOperation,
+       clearDisplay,
+       setMemoryValue,
+       applyMemoryValue,
+       resetMemoryValue} from './actions/index'
 
 
 function App() {
@@ -26,6 +32,18 @@ const handleOperationChange=event=>{
 
 const handleClearDisplay=event=>{
   dispatch(clearDisplay(event.target.innerText))
+}
+
+const handleSetMemoryValue= ()=>{
+  dispatch(setMemoryValue(state.total))
+}
+
+const handleApplyMemoryValue=()=>{
+  dispatch(applyMemoryValue(state.memory))
+}
+
+const handleResetMemoryValue=(event)=>{
+  dispatch(resetMemoryValue(event.target.innerText))
 }
   // const handleButtonOne=()  =>{
   //   dispatch(addOne());
@@ -48,9 +66,9 @@ const handleClearDisplay=event=>{
             </div>
             
             <div className="row">
-              <CalcButton value={"M+"}/>
-              <CalcButton value={"MR"}/>
-              <CalcButton value={"MC"}/>
+              <CalcButton value={"M+"} onClick={handleSetMemoryValue}/>
+              <CalcButton value={"MR"} onClick={handleApplyMemoryValue}/>
+              <CalcButton value={"MC"} onClick={handleResetMemoryValue}/>
             </div>
 
             <div className="row">

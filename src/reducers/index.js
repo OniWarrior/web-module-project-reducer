@@ -1,4 +1,10 @@
-import { ADD_ONE, APPLY_NUMBER, CHANGE_OPERATION, CLEAR_DISPLAY } from './../actions';
+import { ADD_ONE, 
+    APPLY_NUMBER, 
+    CHANGE_OPERATION, 
+    CLEAR_DISPLAY, 
+    SET_MEMORY_VALUE,
+    APPLY_MEMORY_VALUE, 
+    RESET_MEMORY_VALUE} from './../actions';
 
 export const initialState = {
     total: 0,
@@ -15,7 +21,12 @@ const calculateResult = (num1, num2, operation) => {
         case("-"):
             return num1 - num2;
         case("CE"):
-            return 0;
+            return 0;    
+        case ('M+'):
+            return num1; // this is the current value to be set to memory
+        
+
+            
     }
 }
 
@@ -43,6 +54,21 @@ const reducer = (state, action) => {
             return ({
                 ...state,
                 total:0
+            })
+        case(SET_MEMORY_VALUE):
+            return ({
+                ...state,
+                memory:action.payload
+            })
+        case(APPLY_MEMORY_VALUE):
+            return ({
+                ...state,
+                total: calculateResult(state.total, action.payload, state.operation)
+            }) 
+        case(RESET_MEMORY_VALUE):
+            return({
+                ...state,
+                memory:0
             })
             
         default:
