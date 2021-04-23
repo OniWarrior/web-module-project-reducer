@@ -8,7 +8,7 @@ import {useReducer} from 'react'
 import {initialState} from './reducers/index'
 import reducer from './reducers/index'
 
-import {addOne,applyNumber,changeOperation} from './actions/index'
+import {addOne,applyNumber,changeOperation,clearDisplay} from './actions/index'
 
 
 function App() {
@@ -22,6 +22,10 @@ const handleApplyNumber = event=>{
 const handleOperationChange=event=>{
   
   dispatch(changeOperation(event.target.innerText))
+}
+
+const handleClearDisplay=event=>{
+  dispatch(clearDisplay(event.target.innerText))
 }
   // const handleButtonOne=()  =>{
   //   dispatch(addOne());
@@ -74,7 +78,7 @@ const handleOperationChange=event=>{
             </div>
 
             <div className="row ce_button">
-              <CalcButton value={"CE"}/>
+              <CalcButton value={"CE"} onClick={handleClearDisplay}/>
             </div>
 
           </form>
